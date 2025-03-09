@@ -1,21 +1,24 @@
-name: ci
+name: CI
 
-on:
-  push:
-    branches:
-      - master
-  schedule:
-    - cron: "*/15 * * * *"
+   on:
+     push:
+       branches:
+         - main
+     pull_request:
+       branches:
+         - main
 
-permissions:
-  contents: write
-
-jobs:
-  autogreen:
-    runs-on: ubuntu-latest
-    steps:
-      - name: wanluna29
-        uses: wanwanhelp@gmail.com
+   jobs:
+     build:
+       runs-on: ubuntu-latest
+       steps:
+         - uses: actions/checkout@v2
+         - name: Set up Node.js
+           uses: actions/setup-node@v2
+           with:
+             node-version: '14'
+         - run: npm install
+         - run: npm run build    分支
 
       - name: Auto green
         run: |
